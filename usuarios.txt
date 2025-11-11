@@ -1,0 +1,12 @@
+arthur|arthur@gmail|aw
+camila|reis|111camila|camilareis286@gmail.com|111rafael |rafael@fei|222reis|camila|1camila|reis|222
+camila|reis|111
+camila|camilafei@gmail|777
+camila|reis|888
+||
+rafael|rafafei@gmail|333
+& C:/Users/home/AppData/Local/Programs/Python/Python314/python.exe c:/Users/home/Downloads/FEIfood/iffod.py||
+camila|reis|1234
+camila|reis|12345
+arthur|vasques@fei|3333
+arthur |vasques@fei|1234
