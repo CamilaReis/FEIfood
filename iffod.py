@@ -11,6 +11,48 @@
 # 5º Cadastrar pedido* - Criar, editar, excluir pedidos - Adicionar/remover alimentos da lista de pedidos
 # 6º Avaliar pedido** - Atribuir de 0 a 5 estrelas para o pedido
 
+
+# PAGINA PRINCIPAL
+print("BEM-VINDO AO FEIFOOD 🍔")
+print("1 - Ver menu de alimentos")
+print("2 - Sair")
+
+# Pede para o usuário escolher uma opção
+opcao = input("Escolha uma opção: ")
+
+# Se o usuário escolher 1, vai ver o menu de alimentos
+if opcao == "1":
+    print("\nMENU DE ALIMENTOS")
+    try: #comando p nao dar erro
+        # Abre o arquivo de alimentos e lê todas as linhas
+        with open("alimentos.txt", "r") as arquivo:
+            alimentos = arquivo.readlines()
+            
+            # Se o arquivo estiver vazio, mostra que não há alimentos
+            if not alimentos:
+                print("Nenhum alimento disponível ainda.\n")
+            else:
+                # Percorre cada linha do arquivo e mostra os alimentos formatados
+                for linha in alimentos:
+                    partes = linha.strip().split("|")
+                    if len(partes) == 3:
+                        nome, tipo, preco = partes
+                        print(f"- {nome} ({tipo}) - R$ {preco}")
+    except FileNotFoundError:
+        # Caso o arquivo alimentos.txt não exista
+        print("Arquivo alimentos.txt não encontrado.\n")
+
+# Se o usuário escolher 2, o programa encerra
+elif opcao == "2":
+    print("Saindo do feiFood... até logo!")
+    exit()
+
+# Caso o usuário digite uma opção inválida
+else:
+    print("Opção inválida! Encerrando o sistema.")
+    exit()
+
+
 # CADASTRA USUARIO
 print("faca o seu cadastro")
 nome = input("Digite seu nome: ")
@@ -24,7 +66,7 @@ print("Usuário cadastrado com sucesso!")
 #LOGIN USUARIO
 #pedir email e senha do usuario 
 print("faca o seu login")
-email = input("Digite o seu e-mail: ").strip() # strip e,e tura os espacis extras 
+email = input("Digite o seu e-mail: ").strip() # strip tira espaço extra
 senha = input("Digite sua senha: ").strip()
 
 with open("usuarios.txt", "r") as arquivo: # abre o arquivo
@@ -82,10 +124,10 @@ else:
 
 #LISTAR INFORMACAO DOS ALIMENTOS LISTADOS
 busca = input("Digite o nome do alimento: ")
-with open("alimentos.txt", "r") as arquivo:
+with open("alimentos.txt", "r") as arquivo:  #  cria uma lista de listas, separando por "|"
     alimentos = [linha.strip().split("|") for linha in arquivo]
-encontrado = False
-for nome, tipo, preco in alimentos:
+encontrado = False # Cria uma variável de controle para saber se o alimento foi encontrado ou não
+for nome, tipo, preco in alimentos: # Percorre cada alimento da lista
     if busca == nome:
         print(f"Alimento encontrado: {nome} ({tipo}) - R$ {preco}\n")
         encontrado = True
@@ -98,22 +140,35 @@ if not encontrado:
         print(f"- {nome} ({tipo}) - R$ {preco}\n")
         
 #CADASTRAR PEDIDO (criar, editar, e excluir pedidos + adicionar e remover da lista)
-print("faca o seu cadastro do seu pedido")
-nome_usuario = input("Digite seu nome: ") # nome de quem está fazendo o pedido
-pedido = input("confirme o alimento escolhido: ")
-# abra a lista de alimentos lê todas as linhas
-#  vai ser separada por "|"
+print("FAÇA SEU PEDIDO")
+nome_usuario = input("Digite seu nome: ")
+pedido = input("Digite o alimento que deseja pedir: ")
+# abre a lista de alimentos e lê todas as linhas do arquivo
 with open("alimentos.txt", "r") as arq:
     alimentos = [linha.strip().split("|") for linha in arq]
-#percorre pela minha lista de alimentos
+# percorre a lista de alimentos para verificar se o alimento digitado existe
 for nome, tipo, preco in alimentos:
-    if pedido == nome: # aquele está verificando se o alimento digitado está no arquivo
-        with open("pedidos.txt", "a") as ped: # se tiver abre o arquivo de pedidos e add 
-            ped.write(f"{nome_usuario}|{nome}|{tipo}|{preco}\n")
-        print(f" Pedido realizado com sucesso: {nome} ({tipo}) - R$ {preco}\n") # mostra q o pedidio foi realizado 
+    if pedido == nome:  # se o alimento existir, coloca o pedido no arquivo
+        with open("pedidos.txt", "a") as pededido: 
+            pededido.write(f"{nome_usuario}|{nome}|{tipo}|{preco}\n")
+        print(f"\nAlimento encontrado: {nome} ({tipo}) - R$ {preco}")
+        # pergunta se quer continuar
+        continuar = input("Deseja continuar com o pedido? (s/n): ").lower()
+        if continuar == "s":
+            # confirma o pedido e mostra mensagem
+            print(f"\nPedido realizado com sucesso!\nVocê pediu: {nome} ({tipo}) - R$ {preco}\n")
+            
+            # AVALIAÇÃO DO PEDIDO (já existente no seu código)
+            print("AVALIAÇÃO DO PEDIDO")
+            avaliacao = input("Nos avalie de 0 a 5 estrelas: ")
+            print(f"Obrigado pela sua avaliação de {avaliacao} estrelas!\n")
+        else:
+            print("Pedido cancelado.\n")
         break
 else:
-    print("Alimento não encontrado.") # se o pedido não for encontrado vai mostrar essa mensagem
+    # caso o alimento não exista, mostra mensagem de erro
+    print("Alimento não encontrado.\n")
+
 
    # AVALIACAO DO PEDIDO 
     #DE 0 A 5 ESTRELAS!

@@ -1,3 +1,9 @@
 camila|pizza|Italiana|35.00
 rafael|pizza|Italiana|35.00
 camila|pizza|Italiana|35.00
+camila|pizza|Italiana|35.00
+aaa|batata|frita|20.00
+batata|batata|frita|20.00
+camila|batata|frita|20.00
+sss|pizza|Italiana|35.00
+camila|brigadeiro|sobremesa|5.00

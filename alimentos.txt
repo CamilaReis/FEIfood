@@ -1,4 +1,4 @@
 pizza|Italiana|35.00
-hamburger|Americano|25.00
+batata|frita|20.00
 sushi|Japones|42.00
 brigadeiro|sobremesa|5.00
